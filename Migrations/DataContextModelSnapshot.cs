@@ -15,7 +15,7 @@ namespace CapstoneCompanion.API.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
-            modelBuilder.Entity("CapstoneCompanion.API.Models.Hymn", b =>
+            modelBuilder.Entity("CapstoneCompanion.API.Models.Project", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -26,7 +26,7 @@ namespace CapstoneCompanion.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Hymns");
+                    b.ToTable("Projects");
                 });
 #pragma warning restore 612, 618
         }

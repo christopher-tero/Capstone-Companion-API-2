@@ -7,7 +7,7 @@ namespace CapstoneCompanion.API.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Hymns",
+                name: "Projects",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -17,14 +17,14 @@ namespace CapstoneCompanion.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Hymns", x => x.Id);
+                    table.PrimaryKey("PK_Projects", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Hymns");
+                name: "Projects");
         }
     }
 }
