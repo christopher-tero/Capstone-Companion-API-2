@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CapstoneCompanion.API.Data;
+using CapstoneCompanion.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,24 +23,33 @@ namespace CapstoneCompanion.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetValues()
         {
-            var values = await _context.Projects.ToListAsync();
+            var projects = await _context.Projects.ToListAsync();
 
-            return Ok(values);
+            return Ok(projects);
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetValue(int id)
         {
-            var value = await _context.Projects.FirstOrDefaultAsync(x => x.Id == id);
+            var project = await _context.Projects.FirstOrDefaultAsync(x => x.Id == id);
 
-            return Ok(value);
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(project);
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> PostProject(Project project)
         {
+            _context.Projects.Add(project);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetValue), new { id = project.Id }, project);
         }
 
         // PUT api/values/5
